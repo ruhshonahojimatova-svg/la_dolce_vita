@@ -15,8 +15,8 @@
     !window.supabase ||
     !cfg.SUPABASE_URL ||
     !cfg.SUPABASE_KEY ||
-    cfg.SUPABASE_URL.includes('https://hsykyywgcjfanjhzvroj.supabase.co') ||
-    cfg.SUPABASE_KEY.includes('sb_publishable_W9rYAyyx9cL7ScA6WWCoPA_WFOoQCXl');
+    cfg.SUPABASE_URL.includes('ВСТАВЬТЕ') ||
+    cfg.SUPABASE_KEY.includes('ВСТАВЬТЕ');
 
   function esc(value) {
     return String(value ?? '').replace(/[&<>"']/g, c => ({
