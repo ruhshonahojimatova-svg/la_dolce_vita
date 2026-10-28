@@ -1,0 +1,136 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Админ-панель — LA DOLCE VITA</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="admin.js" defer></script>
+</head>
+<body>
+<header>
+  <a class="logo" href="/">
+    LA DOLCE VITA
+    <span>ПАНЕЛЬ УПРАВЛЕНИЯ</span>
+  </a>
+  <a href="/">← На сайт</a>
+</header>
+
+<main>
+  <p id="setupWarning" class="notice" hidden>
+    Заполните настройки Supabase в config.js и обновите страницу.
+  </p>
+
+  <section id="loginPanel" class="card login">
+    <div class="eyebrow">Area riservata</div>
+    <h1>Вход администратора</h1>
+
+    <form id="loginForm">
+      <label>Электронная почта
+        <input id="email" type="email" required autocomplete="username">
+      </label>
+
+      <label>Пароль
+        <input id="password" type="password" required autocomplete="current-password">
+      </label>
+
+      <button class="btn">Войти</button>
+      <p id="loginMessage" class="message"></p>
+    </form>
+  </section>
+
+  <section id="dashboard" hidden>
+    <div class="dash-head">
+      <div>
+        <div class="eyebrow">Gestione del menu</div>
+        <h1>Управление меню</h1>
+        <p id="adminEmail"></p>
+      </div>
+      <button class="btn light" id="logoutButton">Выйти</button>
+    </div>
+
+    <p id="dashboardMessage" class="message"></p>
+
+    <div class="layout">
+      <section class="card">
+        <h2 id="formTitle">Добавить блюдо</h2>
+
+        <form id="productForm">
+          <input type="hidden" id="productId">
+
+          <label>Название *
+            <input id="productName" required maxlength="100">
+          </label>
+
+          <div class="two">
+            <label>Цена в рублях *
+              <input id="productPrice" type="number" min="0" step="1" required>
+            </label>
+
+            <label>Категория *
+              <input id="productCategory" list="categories" required maxlength="60">
+              <datalist id="categories">
+                <option>Пицца</option>
+                <option>Паста</option>
+                <option>Закуски</option>
+                <option>Десерты</option>
+                <option>Напитки</option>
+              </datalist>
+            </label>
+          </div>
+
+          <label>Описание
+            <textarea id="productDescription" rows="3" maxlength="600"></textarea>
+          </label>
+
+          <label>Метка (необязательно)
+            <input id="productTag" maxlength="40" placeholder="Новинка, Бестселлер">
+          </label>
+
+          <label>Фото блюда
+            <input id="productPhoto" type="file" accept="image/jpeg,image/png,image/webp">
+          </label>
+
+          <p class="hint">JPG, PNG или WebP, максимум 5 МБ.</p>
+
+          <div id="photoPreviewWrap" hidden>
+            <img id="photoPreview" alt="Предпросмотр">
+            <button id="clearPhoto" class="text-btn" type="button">
+              Убрать выбранное фото
+            </button>
+          </div>
+
+          <label class="check">
+            <input id="productAvailable" type="checkbox" checked>
+            Доступно для заказа
+          </label>
+
+          <div class="actions">
+            <button class="btn" id="saveButton">Сохранить блюдо</button>
+            <button class="btn light" id="cancelEdit" type="button" hidden>
+              Отмена
+            </button>
+          </div>
+
+          <p id="formMessage" class="message"></p>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="list-head">
+          <h2>Блюда в меню</h2>
+          <button class="btn light" id="refreshButton">Обновить</button>
+        </div>
+        <div id="productsList">Загрузка…</div>
+      </section>
+    </div>
+  </section>
+</main>
+</body>
+</html>
